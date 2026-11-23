@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Oh, Pastry!</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="floating float-1">🥐</div>
+  <div class="floating float-2">🧁</div>
+  <div class="floating float-3">🍩</div>
+  <div class="floating float-4">🥤</div>
+  <div class="cloud cloud-1">☁️</div>
+  <div class="cloud cloud-2">☁️</div>
+  <div class="cloud cloud-3">☁️</div>
+  <div class="cloud cloud-4">☁️</div>
+
+<header>
+  <h1 onclick="showPage('beranda')">Oh, Pastry! 🥐</h1>
+  <nav>
+    <button onclick="showPage('beranda')">Beranda</button>
+    <button onclick="showPage('menu')">Menu</button>
+    <button onclick="showPage('keranjang')">Keranjang (<span id="cartCount">0</span>)</button>
+    <button onclick="showPage('pesanan')">Pesanan</button>
+    <button onclick="showPage('profil')">Profil</button>
+  </nav>
+</header>
+
+<section id="page-beranda" class="page active">
+  <div class="hero">
+    <img src="img/banner2.jpg" class="hero-img">
+    <p class="promo-badge">🔥 PROMO HARI INI: Beli 2 Gratis 1 Cream Puff!</p>
+    <h2>Manisnya Pastry, Segarnya Minuman, Semua di Satu Tempat</h2>
+    <p class="hero-subtitle">Minuman Manis • Pastry • Roti</p>
+    <p>Pastry lembut, roti fresh, dan minuman manis, dibuat setiap hari di Haurgeulis.</p>
+    <button onclick="showPage('menu')">Lihat Menu →</button>
+  </div>
+  <h3 class="section-title">Best Seller 🔥</h3>
+  <div id="bestSeller" class="grid"></div>
+
+  <h3 class="section-title section-title-testi">Kata Mereka 💜</h3>
+  <p class="center">Yang udah jajan di Oh, Pastry!</p>
+  <div class="testi-container">
+    <div class="testi-card">
+      <p class="bintang">⭐⭐⭐⭐⭐</p>
+      <p>"Croissantnya enak banget, masih anget pas dateng! Buttery nya kerasa, gak pelit isi!"</p>
+      <h4>- Sinta</h4>
+      <span>Beli: Croissant</span>
+    </div>
+    <div class="testi-card">
+      <p class="bintang">⭐⭐⭐⭐⭐</p>
+      <p>"Matcha Latte nya enak, gak terlalu manis. Order lewat WA juga fast respon banget!"</p>
+      <h4>- Rizky</h4>
+      <span>Beli: Matcha Latte</span>
+    </div>
+    <div class="testi-card">
+      <p class="bintang">⭐⭐⭐⭐⭐</p>
+      <p>"Udah 3x jajan disini! Cream Puff nya wajib coba, lembut banget. Recommended buat yang di Haurgeulis!"</p>
+      <h4>- Putri</h4>
+      <span>Beli: Cream Puff</span>
+    </div>
+  </div>
+</section>
+
+<div id="page-menu" class="page">
+  <h2 class="center">Menu</h2>
+  <p class="center">pilih menu yang kamu mau yaa</p>
+  <div class="search-bar">
+    <input id="searchInput" placeholder="🔍 Cari Croissant, Matcha, Coffee..." oninput="cariProduk(this.value)">
+    <button onclick="resetSearch()">Reset</button>
+  </div>
+  <div class="filter-bar">
+    <button onclick="filterKategori('semua')">Semua</button>
+    <button onclick="filterKategori('pastry')">Pastry</button>
+    <button onclick="filterKategori('dingin')">Minuman Dingin</button>
+    <button onclick="filterKategori('hangat')">Minuman Hangat</button>
+  </div>
+  <div id="katalogList" class="grid"></div>
+</div>
+
+<div id="page-keranjang" class="page">
+  <h2 class="center">Keranjang Kamu 🛒</h2>
+  <p class="center">cek lagi pesanan kamu sebelum checkout yaa</p>
+  <div id="keranjangList"></div>
+
+  <div class="promo-box">
+    <b>🎉 Ada Promo Nih!</b>
+    <div class="promo-list">
+      <button onclick="pakaiPromo('HEMAT10')">HEMAT10 - Diskon 10%</button>
+      <button onclick="pakaiPromo('GRATISONGKIR')">GRATISONGKIR - Free Ongkir</button>
+      <button onclick="pakaiPromo('HEMAT20')">HEMAT20 - Diskon 20% min. 50rb</button>
+    </div>
+    <div class="promo-input-row">
+      <input type="text" id="kode-promo" placeholder="Masukin kode promo...">
+      <button onclick="cekPromo()">Pakai</button>
+    </div>
+    <div id="promo-info"></div>
+  </div>
+
+  <h3 class="section-title section-title-bayar">Pilih Pembayaran</h3>
+
+  <div class="pay-option" onclick="selectPay('DANA', this)">
+    <img src="img/dana.jpeg" class="pay-logo">
+    <div><b>DANA</b><small>0831-4850-5968</small></div>
+  </div>
+
+  <div class="pay-option" onclick="selectPay('OVO', this)">
+    <img src="img/ovo.jpeg" class="pay-logo">
+    <div><b>OVO</b><small>0838-4106-2042</small></div>
+  </div>
+
+  <div class="pay-option" onclick="selectPay('GoPay', this)">
+    <img src="img/gopay.jpeg" class="pay-logo">
+    <div><b>GoPay</b><small>0895-2021-1438</small></div>
+  </div>
+
+  <div class="pay-option" onclick="selectPay('ShopeePay', this)">
+    <img src="img/shopee.jpeg" class="pay-logo">
+    <div><b>ShopeePay</b><small>0812-1685-1489</small></div>
+  </div>
+
+  <div class="pay-option" onclick="selectPay('BRI', this)">
+    <img src="img/bri.jpeg" class="pay-logo">
+    <div><b>Transfer Bank BRI</b><small>1234-01-XXXXXX-XX-X - a/n Nama Kamu</small></div>
+  </div>
+
+  <div class="pay-option" onclick="selectPay('COD', this)">
+    <img src="img/cod.jpeg" class="pay-logo">
+    <div><b>COD / Bayar di Tempat</b><small>Bayar cash pas datang</small></div>
+  </div>
+
+  <!-- Kotak info nomor -->
+  <div id="pay-info">
+    <b id="pay-info-title">Transfer ke:</b>
+    <div id="pay-info-text"></div>
+    <div class="pay-info-note">Abis transfer, jangan lupa kirim bukti ke WhatsApp ya!</div>
+    <button onclick="copyPay()" class="btn-copy">Salin Nomor</button>
+  </div>
+
+  <div id="totalBox" class="total-box"></div>
+  <button onclick="checkout()" class="btn-full btn-checkout">Checkout via WhatsApp 💬</button>
+</div>
+
+<div id="page-pesanan" class="page">
+  <h2 class="center">Pesanan Saya</h2>
+  <p class="center">ini riwayat pesanan kamu</p>
+  <div id="pesananList"></div>
+</div>
+
+<div id="page-profil" class="page">
+  <h2 class="center">Profil Saya</h2>
+  <div class="profil-box">
+    <div class="profil-foto-wrap" onclick="document.getElementById('input-foto').click()">
+      <img id="foto-profil" src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Foto Profil">
+      <div class="profil-foto-edit">📷 Ganti</div>
+    </div>
+    <input type="file" id="input-foto" accept="image/*" hidden onchange="gantiFoto(event)">
+
+    <b id="nama-profil">Nama Kamu</b>
+    <small>Pelanggan Setia</small>
+    <p id="email-profil"></p>
+    <button id="btn-profil-aksi" onclick="bukaLogin()" class="btn-copy">Login / Daftar</button>
+    <button onclick="editUsername()" class="btn-edit-username">✏️ Ubah Username</button>
+  </div>
+</div>
+
+<div id="loginModal">
+  <div class="login-box">
+    <span onclick="tutupLogin()" class="btn-close">❌</span>
+    <h2 id="authTitle">Login Akun</h2>
+    <input id="authNama" placeholder="Nama Lengkap (kalo mau daftar)" class="hidden">
+    <input id="authEmail" placeholder="Email kamu">
+    <div class="pass-wrap">
+      <input id="authPass" type="password" placeholder="Password">
+      <span onclick="lihatPass()" class="btn-eye">👁️</span>
+    </div>
+    <div id="konfirmasiBox" class="hidden">
+      <input id="authPass2" type="password" placeholder="Ulangi Password">
+    </div>
+    <button onclick="prosesAuth()" class="btn-full">Masuk</button>
+    <p><a href="#" onclick="lupaPass(event)">Lupa Password?</a></p>
+    <p>belum punya akun? <a href="#" onclick="gantiMode(event)">daftar disini</a></p>
+    <p id="authMsg" class="auth-msg"></p>
+  </div>
+</div>
+
+<footer class="footer">
+  <h3>Oh, Pastry! 🥐</h3>
+  <p>Manisnya Pastry, Segarnya Minuman, Semua di Satu Tempat</p>
+  <p>📍 Haurgeulis, Indramayu</p>
+  <p>🕐 Buka Setiap Hari: 08.00 - 20.00 WIB</p>
+  <p>📱 Order via WA: 0831-4850-5968</p>
+  <div class="footer-btn">
+    <button onclick="showPage('menu')">Lihat Menu→</button>
+    <button onclick="bukaWA()" class="btn-wa">Chat WA 💬</button>
+  </div>
+  <p class="footer-kecil">© 2026 Oh, Pastry! Dibuat dengan 💜 di Haurgeulis</p>
+</footer>
+
+<script src="javascript.js"></script>
+</body>
+</html>
